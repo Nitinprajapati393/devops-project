@@ -31,6 +31,12 @@ resource "azurerm_storage_container" "tfstate" {
   container_access_type = "private"
 }
 
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_name  = azurerm_storage_account.tfstate.name
+  container_access_type = "private"
+}
+
 resource "azurerm_container_group" "example" {
   name                = "example-container-group"
   location            = azurerm_resource_group.tfstate.location
@@ -38,13 +44,16 @@ resource "azurerm_container_group" "example" {
   os_type             = "Linux"
 
   container {
-    name   = "busybox"
-    image  = "busybox"
-    cpu    = "0.5"
-    memory = "1.5"
-    command = ["echo", "Hello, World!"]
+    name   = "nexus-repo"
+    image  = "nitin333/nexus-repo"
+    cpu    = "1.0"
+    memory = "2.0"
+    ports {
+      port     = 8081
+      protocol = "TCP"
+    }
   }
 
   ip_address_type = "public"
-  dns_name_label  = "example-busybox-container"
+  dns_name_label  = "example-nexus-container"
 }
