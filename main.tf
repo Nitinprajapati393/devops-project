@@ -48,6 +48,6 @@ resource "azurerm_container_group" "example" {
     }
   }
 
-  ip_address_type = "public"
+  ip_address_type = "Public"
   dns_name_label  = "example-nexus-container"
 }
