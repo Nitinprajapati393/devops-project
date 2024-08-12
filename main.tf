@@ -38,16 +38,13 @@ resource "azurerm_container_group" "example" {
   os_type             = "Linux"
 
   container {
-    name   = "nginx"
-    image  = "nginx:latest"
+    name   = "busybox"
+    image  = "busybox"
     cpu    = "0.5"
     memory = "1.5"
-    ports {
-      port     = 80
-      protocol = "TCP"
-    }
+    command = ["echo", "Hello, World!"]
   }
 
-  ip_address_type = "Public"
-  dns_name_label  = "example-nginx-container"
-} 
+  ip_address_type = "public"
+  dns_name_label  = "example-busybox-container"
+}
