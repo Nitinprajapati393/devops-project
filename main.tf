@@ -15,6 +15,12 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
 }
 
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_name  = azurerm_storage_account.tfstate.name
+  container_access_type = "private"
+}
+
 resource "azurerm_container_group" "example" {
   name                = "example-container-group"
   location            = azurerm_resource_group.example.location
