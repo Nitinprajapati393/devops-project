@@ -6,13 +6,13 @@ terraform {
     }
   }
 }
+
 provider "azurerm" {
-  alias = "devopsproject"
-  features = {}
+  skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
+  features {}
 }
 
 resource "azurerm_resource_group" "tfstate" {
-  provider = azurerm.devopsproject
   name     = "example-resources"
   location = "East US"
 }
@@ -33,8 +33,8 @@ resource "azurerm_storage_container" "tfstate" {
 
 resource "azurerm_container_group" "example" {
   name                = "example-container-group"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.tfstate.location
+  resource_group_name = azurerm_resource_group.tfstate.name
   os_type             = "Linux"
 
   container {
