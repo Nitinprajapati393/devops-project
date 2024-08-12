@@ -12,6 +12,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "tfstate" {
+  provider = azurerm.devopsproject
   name     = "example-resources"
   location = "East US"
 }
