@@ -38,16 +38,16 @@ resource "azurerm_container_group" "example" {
   os_type             = "Linux"
 
   container {
-    name   = "nexus-repo"
-    image  = "nitin333/nexus-repo"
-    cpu    = "1.0"
-    memory = "2.0"
+    name   = "nginx"
+    image  = "nginx:latest"
+    cpu    = "0.5"
+    memory = "1.5"
     ports {
-      port     = 8081
+      port     = 80
       protocol = "TCP"
     }
   }
 
-  ip_address_type = "Public"
-  dns_name_label  = "example-nexus-container"
+  ip_address_type = "public"
+  dns_name_label  = "example-nginx-container"
 }
