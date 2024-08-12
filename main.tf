@@ -13,7 +13,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "tfstate" {
-  name     = "example-resources"
+  name     = "example-resources-test"
   location = "East US"
 }
 
@@ -32,7 +32,7 @@ resource "azurerm_storage_container" "tfstate" {
 }
 
 resource "azurerm_container_group" "example" {
-  name                = "example-continst"
+  name                = "example-continst-test"
   location            = azurerm_resource_group.tfstate.location
   resource_group_name = azurerm_resource_group.tfstate.name
   ip_address_type     = "Public"
